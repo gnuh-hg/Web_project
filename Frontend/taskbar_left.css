@@ -73,6 +73,7 @@
     color: #dbdee1;
     font-size: 14px;
     list-style: none;
+    /* margin-left: 5px; */
 }
 
 /* Project */
@@ -102,7 +103,7 @@
 
 .project div.child {
     background-color: transparent;
-    margin-left: 10px;
+    margin-left: 12px;
 }
 
 .project div.parent svg.logo_project {
