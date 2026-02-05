@@ -1,0 +1,290 @@
+/* Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Khối taskbar_left */
+.taskbar_left {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background-color: #1a1a20;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Thanh tìm kiếm*/
+.search {
+    background-color: #24242a;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 5px 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.search_icon {
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+    color: #949ba4;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.search_input {
+    background: transparent;
+    border: none;
+    color: #dbdee1;
+    font-size: 15px;;
+    outline: none;
+    width: 100%;
+}
+
+.search_input::placeholder {
+    color: #949ba4;
+}
+
+.search:focus-within {
+    background-color: #2b2d31;
+}
+
+/* Quản lý công việc */
+
+.container_folder {
+    background-color: transparent;
+    padding: 5px;
+    /* padding-left: 0px; */
+}
+
+.folder {
+    background-color: transparent;
+    /* padding-left:10px;  */
+    width: 100%;
+    outline: none;
+    color: #dbdee1;
+    font-size: 14px;
+    list-style: none;
+}
+
+/* Project */
+.project {
+    background-color: transparent;
+    border-radius: 5px;
+    margin: 0;
+    width: 100%;
+    outline: none;
+    color: #dbdee1;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.project div.parent {
+    background-color: transparent;
+    display: flex;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin: 0;
+    width: 100%;
+    outline: none;
+    color: #dbdee1;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.project div.child {
+    background-color: transparent;
+    margin-left: 10px;
+}
+
+.project div.parent svg.logo_project {
+    width: 22px;
+}
+
+.project div.parent svg.logo_project path {
+    fill: white;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.project div.parent p.name {
+    position: relative;
+    top: 3px;
+    margin-left: 0;
+    margin-right: auto;
+    background-color: transparent;
+}
+
+.project div.parent svg.more {
+    display: none;
+    background-color: transparent;
+    width: 25px;
+    margin-left: auto;
+}
+
+.project div.parent svg.more circle {
+    fill: white;
+}
+
+.project div.parent svg {
+    width: 15px;
+    background-color: transparent;
+    margin-right: 4px;
+}
+
+.project div.parent svg polyline {
+    fill: none;
+    stroke: white;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.project div.parent svg.open {
+    display: none;
+}
+
+.project:hover > div.parent svg.open {
+    display: block;
+}
+
+.project:hover > div.parent svg.close {
+    display: none;
+}
+
+/* Task */
+.task {
+    background-color: transparent;
+    display: flex;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 0px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+}
+
+.task p {
+    background-color: transparent;
+    outline: none;
+    color: #dbdee1;
+    font-size: 14px;
+}
+
+.task svg.logo_task {
+    
+    width: 10px;
+    background-color: transparent;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.task svg.logo_task circle {
+    fill: white;
+    stroke-width: 4;
+}
+
+.task svg.more {
+    display: none;
+    background-color: transparent;
+    width: 25px;
+    margin-left: auto;
+}
+
+.task svg.more circle {
+    fill: white;
+}
+
+.project div.child ul.folder {
+    display: none;
+}
+
+.project:hover > div.child {
+    border-left: 1px solid #2b2d31;
+}
+
+.project:hover > div.child > ul.folder {
+    display: block;
+}
+
+.folder li.task:hover, .folder li.project div.parent:hover {
+    background-color: #2b2d31;
+}
+
+.folder li.task:hover > svg.more, .folder li.project div.parent:hover > svg.more {
+    display: block;
+}
+
+/* Add project*/
+.add {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: none;
+    border-top: 1px solid #2b2d31;
+}
+
+.add p {
+    background-color: transparent;
+    color: #ef5541;
+}
+
+.logo_left {
+    background-color: transparent;
+}
+
+.logo_left svg {
+    background-color: transparent;
+    fill: #ef5541;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.logo_right {
+    position: relative;
+    top: 2px;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.logo_right svg {
+    background-color: transparent;
+    width: 25px;
+    stroke: #ef5541;
+}
+
+.logo_right svg path {
+    fill: none;
+    stroke-width: 4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    mask: url(#folder-mask);
+}
+
+.add:hover .logo_left svg {
+    fill: #f27767;
+}
+
+.add:hover .logo_right svg {
+    stroke: #f27767;
+}
+
+.add:hover p {
+    color: #f27767;
+}
