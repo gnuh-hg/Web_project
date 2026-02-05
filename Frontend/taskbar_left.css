@@ -104,6 +104,7 @@
 .project div.child {
     background-color: transparent;
     margin-left: 12px;
+    display: none;
 }
 
 .project div.parent svg.logo_project {
@@ -205,7 +206,7 @@
     fill: white;
 }
 
-.project div.child ul.folder {
+.project div.child {
     display: none;
 }
 
@@ -213,7 +214,7 @@
     border-left: 1px solid #2b2d31;
 }
 
-.project:hover > div.child > ul.folder {
+.project:hover > div.child {
     display: block;
 }
 
