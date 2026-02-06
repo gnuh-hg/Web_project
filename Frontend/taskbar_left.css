@@ -62,18 +62,15 @@
 .container_folder {
     background-color: transparent;
     padding: 5px;
-    /* padding-left: 0px; */
 }
 
 .folder {
     background-color: transparent;
-    /* padding-left:10px;  */
     width: 100%;
     outline: none;
     color: #dbdee1;
     font-size: 14px;
     list-style: none;
-    /* margin-left: 5px; */
 }
 
 /* Project */
@@ -155,14 +152,6 @@
     display: none;
 }
 
-/* .project:hover > div.parent svg.open {
-    display: block;
-}
-
-.project:hover > div.parent svg.close {
-    display: none;
-} */
-
 /* Task */
 .task {
     background-color: transparent;
@@ -183,7 +172,6 @@
 }
 
 .task svg.logo_task {
-    
     width: 10px;
     background-color: transparent;
     margin-right: 10px;
@@ -210,10 +198,6 @@
     border-left: 1px solid #2b2d31;
     margin-left: 11px;
 }
-
-/* .project:hover > div.child {
-    display: block;
-} */
 
 .folder li.task:hover, .folder li.project div.parent:hover {
     background-color: #2b2d31;
