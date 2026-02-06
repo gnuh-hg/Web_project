@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="./home.css" />
         <link rel="stylesheet" href="./taskbar_top.css"/>
         <link rel="stylesheet" href="./taskbar_left.css"/>
-        <script src="./taskbar_left.js"></script>
+        <script src="./taskbar_left.js" defer></script>
     </head>
     <body>
         <div class="taskbar_top">
@@ -253,32 +253,44 @@
                     </li>
                 </ul>
             </div>
-            <button class="add">
-                <div class="logo_left">
-                    <svg viewBox="0 0 100 100">
-                        <rect x="44" y="10" width="12" height="80" />
-                        <rect x="10" y="44" width="80" height="12" />
-                    </svg>
-                </div>
-                <p>Add project</p>
-                <div class="logo_right">
-                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <mask id="folder-mask">
-                            <rect width="100%" height="100%" fill="white"/>
-                            <circle cx="46" cy="47" r="9" fill="black"/>
-                          </mask>
-                        </defs>
 
-                        <path d=" M8 20 H22 L26 16 H44 Q50 16 50 22 V40 Q50 48 42 48 H16 Q8 48 8 40 Z"/>
+            <div class="add">
+                <button class="button_add">
+                    <div class="logo_left">
+                        <svg viewBox="0 0 100 100">
+                            <rect x="44" y="10" width="12" height="80" />
+                            <rect x="10" y="44" width="80" height="12" />
+                        </svg>
+                    </div>
+                    <p>Add project</p>
+                    <div class="logo_right">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                              <mask id="folder-mask">
+                                <rect width="100%" height="100%" fill="white"/>
+                                <circle cx="46" cy="47" r="9" fill="black"/>
+                              </mask>
+                            </defs>
 
-                        <g stroke-width="4" stroke-linecap="round">
-                          <line x1="46" y1="42" x2="46" y2="52"/>
-                          <line x1="41" y1="47" x2="51" y2="47"/>
-                        </g>
-                    </svg>
+                            <path d=" M8 20 H22 L26 16 H44 Q50 16 50 22 V40 Q50 48 42 48 H16 Q8 48 8 40 Z"/>
+
+                            <g stroke-width="4" stroke-linecap="round">
+                              <line x1="46" y1="42" x2="46" y2="52"/>
+                              <line x1="41" y1="47" x2="51" y2="47"/>
+                            </g>
+                        </svg>
+                    </div>
+                </button>
+
+                <div class="overlay">
+                    <div class="model_add">
+                    <div class="option_add">
+                        <button class="add_project">Add project</button>
+                        <button class="add_task">Add task</button>
+                    </div>
+                    </div>
                 </div>
-            </button>
+            </div>
         </div>
     </body>
 </html>
