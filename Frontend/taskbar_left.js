@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const overlay = document.querySelector('.overlay');
-    const btnAdd = document.querySelector('.button_add');
-    const button_add_project = document.querySelector('.button_add_project');
-    const button_add_task = document.querySelector('.button_add_task');
-    const add_project = document.querySelector('.add_project');
-    const add_task = document.querySelector('.add_task');
+    // Cập nhật Selector cho Modal/Overlay
+    const overlay = document.querySelector('.modal-overlay');
+    const btnAdd = document.querySelector('.add-button');
+    const btnTabProject = document.querySelector('.btn-tab-project');
+    const btnTabTask = document.querySelector('.btn-tab-task');
+    const projectForm = document.querySelector('.project-form');
+    const taskForm = document.querySelector('.task-form');
     
-    // Xử lý Overlay
+    // Xử lý Overlay (Mở/Đóng Modal)
     if (btnAdd && overlay) {
         btnAdd.addEventListener('click', () => overlay.style.display = 'flex');
         overlay.addEventListener('click', (e) => {
@@ -14,49 +15,67 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Xử lý chuyển đổi Tab Project/Task
-    if (button_add_project && button_add_task) {
-        button_add_project.addEventListener('click', () => {
-            button_add_project.style.borderBottom = "1px solid #00FFFF";
-            button_add_task.style.borderBottom = "1px solid #2b2d31";
-            add_project.style.display = "block";
-            add_task.style.display = "none";
+    // Xử lý chuyển đổi Tab Project/Task trong Modal
+    if (btnTabProject && btnTabTask) {
+        btnTabProject.addEventListener('click', () => {
+            btnTabProject.style.borderBottom = "1px solid #00FFFF";
+            btnTabTask.style.borderBottom = "1px solid #2b2d31";
+            projectForm.style.display = "block";
+            taskForm.style.display = "none";
         });
 
-        button_add_task.addEventListener('click', () => {
-            button_add_task.style.borderBottom = "1px solid #00FFFF";
-            button_add_project.style.borderBottom = "1px solid #2b2d31";
-            add_task.style.display = "block";
-            add_project.style.display = "none";
+        btnTabTask.addEventListener('click', () => {
+            btnTabTask.style.borderBottom = "1px solid #00FFFF";
+            btnTabProject.style.borderBottom = "1px solid #2b2d31";
+            taskForm.style.display = "block";
+            projectForm.style.display = "none";
         });
     }
 
-    // Xử lý nút Option (...) không làm ảnh hưởng cha
-    const moreButtons = document.querySelectorAll('.more');
+    // Xử lý nút Option (...) không làm ảnh hưởng cha (Dùng class .action-more mới)
+    const moreButtons = document.querySelectorAll('.action-more');
     moreButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Quan trọng nhất: chặn nổi bọt
-            // Code mở menu sửa/xóa ở đây
+            e.stopPropagation(); // Chặn nổi bọt để không kích hoạt sự kiện đóng/mở của project cha
+            // Logic mở menu sửa/xóa có thể thêm ở đây
         });
     });
 
-    // Xử lý Đóng/Mở Project
-    const parents = document.querySelectorAll('.parent');
-    parents.forEach(parent => {
-        parent.addEventListener('click', function() {
-            const child = this.parentElement.querySelector('.child');
-            const iconOpen = this.querySelector('.open');
-            const iconClose = this.querySelector('.close');
+    // Xử lý Đóng/Mở Project (Dùng .item-header và .item-content mới)
+    const headers = document.querySelectorAll('.item-header');
+    headers.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.parentElement.querySelector('.item-content');
+            const iconExpanded = this.querySelector('.icon-expanded');
+            const iconCollapsed = this.querySelector('.icon-collapsed');
             
-            if (child) {
-                const isHidden = window.getComputedStyle(child).display === 'none';
-                child.style.display = isHidden ? 'block' : 'none';
+            if (content) {
+                const isHidden = window.getComputedStyle(content).display === 'none';
+                content.style.display = isHidden ? 'block' : 'none';
                 
-                if (iconOpen && iconClose) {
-                    iconOpen.style.display = isHidden ? 'block' : 'none';
-                    iconClose.style.display = isHidden ? 'none' : 'block';
+                // Cập nhật trạng thái Icon SVG
+                if (iconExpanded && iconCollapsed) {
+                    iconExpanded.style.display = isHidden ? 'block' : 'none';
+                    iconCollapsed.style.display = isHidden ? 'none' : 'block';
                 }
             }
         });
+    });
+
+    // Xử lý chọn màu sắc (Dùng .color-swatch mới)
+    const colorSwatches = document.querySelectorAll('.color-swatch');
+    
+    colorSwatches.forEach(swatch => {
+      swatch.addEventListener('click', function() {
+        
+        // Tìm và xóa class 'selected' ở phần tử cũ
+        const currentSelected = document.querySelector('.color-swatch.selected');
+        if (currentSelected) {
+          currentSelected.classList.remove('selected');
+        }
+    
+        // Thêm class 'selected' vào phần tử vừa click
+        this.classList.add('selected');
+      });
     });
 });

@@ -1,12 +1,10 @@
-/* Setup */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Khối taskbar_left */
-.taskbar_left {
+.sidebar-nav {
     position: relative;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -20,8 +18,7 @@
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
-/* Thanh tìm kiếm*/
-.search {
+.search-form {
     background-color: #24242a;
     display: flex;
     align-items: center;
@@ -31,7 +28,7 @@
     transition: background-color 0.2s;
 }
 
-.search_icon {
+.search-icon {
     background-color: transparent;
     width: 20px;
     height: 20px;
@@ -40,30 +37,29 @@
     flex-shrink: 0;
 }
 
-.search_input {
+.search-input {
     background: transparent;
     border: none;
     color: #dbdee1;
-    font-size: 15px;;
+    font-size: 15px;
     outline: none;
     width: 100%;
 }
 
-.search_input::placeholder {
+.search-input::placeholder {
     color: #949ba4;
 }
 
-.search:focus-within {
+.search-form:focus-within {
     background-color: #2b2d31;
 }
 
-/* Quản lý công việc */
-.container_folder {
+.project-container {
     background-color: transparent;
     padding: 5px;
 }
 
-.folder {
+.list-wrapper {
     background-color: transparent;
     width: 100%;
     outline: none;
@@ -72,8 +68,7 @@
     list-style: none;
 }
 
-/* Project */
-.project {
+.project-item {
     background-color: transparent;
     border-radius: 5px;
     margin: 0;
@@ -81,10 +76,9 @@
     outline: none;
     color: #dbdee1;
     font-size: 14px;
-    border-radius: 5px;
 }
 
-.project div.parent {
+.project-item div.item-header {
     background-color: transparent;
     display: flex;
     border-radius: 5px;
@@ -94,27 +88,26 @@
     outline: none;
     color: #dbdee1;
     font-size: 14px;
-    border-radius: 5px;
 }
 
-.project div.child {
+.project-item div.item-content {
     background-color: transparent;
     margin-left: 12px;
     display: none;
 }
 
-.project div.parent svg.logo_project {
+.project-item div.item-header svg.project-icon {
     width: 22px;
 }
 
-.project div.parent svg.logo_project path {
+.project-item div.item-header svg.project-icon path {
     fill: white;
     stroke-width: 3;
     stroke-linejoin: round;
     stroke-linecap: round;
 }
 
-.project div.parent p.name {
+.project-item div.item-header p.label {
     position: relative;
     top: 3px;
     margin-left: 0;
@@ -122,24 +115,24 @@
     background-color: transparent;
 }
 
-.project div.parent svg.more {
+.project-item div.item-header svg.action-more {
     display: none;
     background-color: transparent;
     width: 25px;
     margin-left: auto;
 }
 
-.project div.parent svg.more circle {
+.project-item div.item-header svg.action-more circle {
     fill: white;
 }
 
-.project div.parent svg {
+.project-item div.item-header svg {
     width: 15px;
     background-color: transparent;
     margin-right: 4px;
 }
 
-.project div.parent svg polyline {
+.project-item div.item-header svg polyline {
     fill: none;
     stroke: white;
     stroke-width: 2.5;
@@ -147,74 +140,73 @@
     stroke-linejoin: round;
 }
 
-.project div.parent svg.open {
+.project-item div.item-header svg.icon-expanded {
     display: none;
 }
 
-/* Task */
-.task {
+.task-item {
     background-color: transparent;
     display: flex;
     border-radius: 5px;
     padding: 5px;
     margin-left: 0px;
     width: 100%;
-    border-radius: 5px;
     display: flex;
 }
 
-.task p {
+.task-item p {
     background-color: transparent;
     outline: none;
     color: #dbdee1;
     font-size: 14px;
 }
 
-.task svg.logo_task {
+.task-item svg.task-icon {
     width: 10px;
     background-color: transparent;
     margin-right: 10px;
     margin-left: 5px;
 }
 
-.task svg.logo_task circle {
+.task-item svg.task-icon circle {
     fill: white;
     stroke-width: 4;
 }
 
-.task svg.more {
+.task-item svg.action-more {
     display: none;
     background-color: transparent;
     width: 25px;
     margin-left: auto;
 }
 
-.task svg.more circle {
+.task-item svg.action-more circle {
     fill: white;
 }
 
-.project:hover > div.child {
+.project-item:hover > div.item-content {
     border-left: 1px solid #2b2d31;
     margin-left: 11px;
 }
 
-.folder li.task:hover, .folder li.project div.parent:hover {
+.list-wrapper li.task-item:hover, 
+.list-wrapper li.project-item div.item-header:hover {
     background-color: #2b2d31;
 }
 
-.folder li.task:hover > svg.more, .folder li.project div.parent:hover > svg.more {
+.list-wrapper li.task-item:hover > svg.action-more, 
+.list-wrapper li.project-item div.item-header:hover > svg.action-more {
     display: block;
 }
 
-/* Add project*/
-.add {
+.sidebar-actions {
     background-color: transparent;
     display: flex;
     margin-top: auto;
     border-top: 1px solid #2b2d31;
 }
 
-.button_add {
+.add-button {
     background-color: transparent;
     display: flex;
     width: 100%;
@@ -225,16 +217,16 @@
     border: none;
 }
 
-.button_add p {
+.add-button p {
     background-color: transparent;
     color: #ef5541;
 }
 
-.logo_left {
+.icon-plus {
     background-color: transparent;
 }
 
-.logo_left svg {
+.icon-plus svg {
     background-color: transparent;
     fill: #ef5541;
     width: 18px;
@@ -244,7 +236,7 @@
     margin-left: 5px;
 }
 
-.logo_right {
+.icon-folder-plus {
     position: relative;
     top: 2px;
     background-color: transparent;
@@ -252,13 +244,13 @@
     margin-right: 0px;
 }
 
-.logo_right svg {
+.icon-folder-plus svg {
     background-color: transparent;
     width: 25px;
     stroke: #ef5541;
 }
 
-.logo_right svg path {
+.icon-folder-plus svg path {
     fill: none;
     stroke-width: 4;
     stroke-linejoin: round;
@@ -266,19 +258,19 @@
     mask: url(#folder-mask);
 }
 
-.button_add:hover .logo_left svg {
+.add-button:hover .icon-plus svg {
     fill: #f27767;
 }
 
-.button_add:hover .logo_right svg {
+.add-button:hover .icon-folder-plus svg {
     stroke: #f27767;
 }
 
-.button_add:hover p {
+.add-button:hover p {
     color: #f27767;
 }
 
-.overlay {
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -288,11 +280,9 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
-    /* display: none; */
 }
 
-/* Model new project or task*/
-.model_add {
+.modal-box {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -303,21 +293,19 @@
     width: 300px;
     height: 200px;
     margin: auto;
-    border-radius: 1px;
     border-radius: 10px;
     background-color: #1a1a20;
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
-/* Choose project or task*/
-.option_add {
+.modal-tabs {
     background-color: transparent;
     display: flex;
     width: 100%;
     height: 16%;
 }    
 
-.option_add button {
+.modal-tabs button {
     position: relative;
     background-color: transparent;
     width: 100%;
@@ -325,19 +313,15 @@
     border-bottom: 1px solid #2b2d31;
 }
 
-.option_add button.button_add_project {
+.modal-tabs button.btn-tab-project {
     border-bottom: 1px solid #00FFFF;
 }
 
-/* Set name*/
-.add_project, .add_task {
+.project-form, .task-form {
     background-color: transparent;
-    /* border: 1px solid white; */
-    height: 84%;
 }
 
-.name_project, .name_task {
-    /* border: 1px solid white; */
+.input-group {
     background-color: #24242a;
     display: flex;
     align-items: center;
@@ -347,23 +331,59 @@
     transition: background-color 0.2s;
 }
 
-.name_project_input, .name_task_input {
+.modal-input {
     background: transparent;
     border: none;
     color: #dbdee1;
-    font-size: 15px;;
+    font-size: 15px;
     outline: none;
     width: 100%;
 }
 
-.name_project_input::placeholder, .name_task_input::placeholder {
+.modal-input::placeholder {
     color: #949ba4;
 }
 
-.name_project:focus-within, .name_task:focus-within {
+.input-group:focus-within {
     background-color: #2b2d31;
 }
 
-.add_task {
+.task-form {
     display: none;
+}
+
+.color-palette {
+    background-color: transparent;
+    display: grid;
+    margin: auto;
+    margin-top: 0;
+    grid-template-columns: repeat(10, 20px); 
+    gap: 6px; 
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.color-swatch.selected::after {
+  content: '';
+  width: 3px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
 }
