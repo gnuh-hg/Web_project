@@ -101,7 +101,7 @@
 }
 
 .project-item div.item-header svg.project-icon path {
-    fill: white;
+    /* fill: white; */
     stroke-width: 3;
     stroke-linejoin: round;
     stroke-linecap: round;
@@ -169,7 +169,7 @@
 }
 
 .task-item svg.task-icon circle {
-    fill: white;
+    /* fill: white; */
     stroke-width: 4;
 }
 
@@ -280,6 +280,7 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    display: none;
 }
 
 .modal-box {
@@ -407,4 +408,25 @@
 
 .confirm-box p:hover {
     background-color: #2b2d31;
+}
+
+/* Hiệu ứng khi đang kéo */
+.drag-ghost {
+    opacity: 0.4;
+    background-color: #2b2d31 !important;
+    border: 1px dashed #00FFFF;
+}
+
+/* Đảm bảo vùng chứa list luôn có độ cao tối thiểu để có thể thả vào khi trống */
+.list-wrapper {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-height: 5px;
+}
+
+/* Khi project mở ra, vùng chứa con rộng hơn để dễ thả */
+.item-content .list-wrapper {
+    /* padding-left: 20px; */
+    min-height: 10px;
 }
