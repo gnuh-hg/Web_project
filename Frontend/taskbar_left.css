@@ -58,7 +58,6 @@
 }
 
 /* Quản lý công việc */
-
 .container_folder {
     background-color: transparent;
     padding: 5px;
@@ -289,11 +288,14 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
-    display: none;
+    /* display: none; */
 }
 
+/* Model new project or task*/
 .model_add {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     top: 0; 
     right: 0; 
     bottom: 0; 
@@ -307,6 +309,7 @@
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
+/* Choose project or task*/
 .option_add {
     background-color: transparent;
     display: flex;
@@ -322,6 +325,45 @@
     border-bottom: 1px solid #2b2d31;
 }
 
-.option_add button.add_project:hover, .option_add button.add_task:hover {
+.option_add button.button_add_project {
     border-bottom: 1px solid #00FFFF;
+}
+
+/* Set name*/
+.add_project, .add_task {
+    background-color: transparent;
+    /* border: 1px solid white; */
+    height: 84%;
+}
+
+.name_project, .name_task {
+    /* border: 1px solid white; */
+    background-color: #24242a;
+    display: flex;
+    align-items: center;
+    padding: 7px 12px;
+    margin: 8px 20px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.name_project_input, .name_task_input {
+    background: transparent;
+    border: none;
+    color: #dbdee1;
+    font-size: 15px;;
+    outline: none;
+    width: 100%;
+}
+
+.name_project_input::placeholder, .name_task_input::placeholder {
+    color: #949ba4;
+}
+
+.name_project:focus-within, .name_task:focus-within {
+    background-color: #2b2d31;
+}
+
+.add_task {
+    display: none;
 }
