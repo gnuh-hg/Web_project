@@ -1,21 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Cập nhật Selector cho Modal/Overlay
-    const overlay = document.querySelector('.modal-overlay');
-    const btnAdd = document.querySelector('.add-button');
-    const btnTabProject = document.querySelector('.btn-tab-project');
-    const btnTabTask = document.querySelector('.btn-tab-task');
     const projectForm = document.querySelector('.project-form');
     const taskForm = document.querySelector('.task-form');
     
     // Xử lý Overlay (Mở/Đóng Modal)
+    const overlay = document.querySelector('.modal-overlay');
+    const btnAdd = document.querySelector('.add-button');
+    const btnCancel = document.querySelector('.btn-cancel');
     if (btnAdd && overlay) {
         btnAdd.addEventListener('click', () => overlay.style.display = 'flex');
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) overlay.style.display = 'none';
         });
+        btnCancel.addEventListener('click', () => overlay.style.display = 'none');
     }
 
     // Xử lý chuyển đổi Tab Project/Task trong Modal
+    const btnTabProject = document.querySelector('.btn-tab-project');
+    const btnTabTask = document.querySelector('.btn-tab-task');
     if (btnTabProject && btnTabTask) {
         btnTabProject.addEventListener('click', () => {
             btnTabProject.style.borderBottom = "1px solid #00FFFF";
@@ -73,9 +75,55 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentSelected) {
           currentSelected.classList.remove('selected');
         }
-    
         // Thêm class 'selected' vào phần tử vừa click
         this.classList.add('selected');
       });
     });
+
+    const btnAccept = document.querySelector('.btn-accept');
+    if (btnAccept) {
+        btnAccept.addEventListener('click', function() {
+            // 1. Lấy Loại (Type): Project hay Task
+            // Kiểm tra form nào đang hiển thị
+            const isProjectForm = window.getComputedStyle(projectForm).display !== 'none';
+            const type = isProjectForm ? 'PROJECT' : 'TASK';
+
+            // 2. Lấy Tên (Name)
+            // Lấy input từ form đang hiển thị để tránh lấy nhầm dữ liệu trống
+            const activeInput = isProjectForm 
+                ? projectForm.querySelector('.modal-input') 
+                : taskForm.querySelector('.modal-input');
+            const nameValue = activeInput.value.trim();
+
+            // 3. Lấy Màu sắc (Color)
+            const selectedSwatch = document.querySelector('.color-swatch.selected');
+            // Lấy mã màu trực tiếp từ thuộc tính style inline
+            const colorValue = selectedSwatch ? selectedSwatch.style.backgroundColor : null;
+
+            // 4. Kiểm tra điều kiện (Validation)
+            if (!nameValue) {
+                activeInput.focus();
+                return;
+            }
+
+            if (!selectedSwatch) {
+                return;
+            }
+
+            // DỮ LIỆU CUỐI CÙNG ĐỂ GỬI BACKEND
+            const payload = {
+                type: type,
+                name: nameValue,
+                color: colorValue,
+                parentId: null // Bạn có thể bổ sung logic lấy ID cha nếu đang ở trong project cụ thể
+            };
+
+            // Tạm thời đóng modal sau khi lấy dữ liệu thành công
+            const overlay = document.querySelector('.modal-overlay');
+            overlay.style.display = 'none';
+            
+            // Reset form cho lần dùng sau
+            activeInput.value = '';
+        });
+    }
 });

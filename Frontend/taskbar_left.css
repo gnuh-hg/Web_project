@@ -311,6 +311,7 @@
     width: 100%;
     border: none;
     border-bottom: 1px solid #2b2d31;
+    font-size: 15px;
 }
 
 .modal-tabs button.btn-tab-project {
@@ -397,12 +398,13 @@
 
 .confirm-box p {
     background-color: transparent;
-    padding: 2px;
+    padding: 5px;
     margin: 9px;
     border: 1px solid #2b2d31;
     border-radius: 5px;
+    font-size: 15px;
 }
 
 .confirm-box p:hover {
-
+    background-color: #2b2d31;
 }
