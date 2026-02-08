@@ -1,0 +1,38 @@
+[
+  {
+    "id": "p1770542550907",
+    "name": "wqr",
+    "type": "PROJECT",
+    "parent_id": null,
+    "position": 0,
+    "color": "rgb(246, 173, 85)",
+    "expanded": true
+  },
+  {
+    "id": "t1770542557411",
+    "name": "vqw2",
+    "type": "TASK",
+    "parent_id": "p1770542550907",
+    "position": 0,
+    "color": "rgb(154, 230, 180)",
+    "expanded": false
+  },
+  {
+    "id": "p1770542599138",
+    "name": "wq",
+    "type": "PROJECT",
+    "parent_id": "p1770542550907",
+    "position": 1,
+    "color": "#ffffff",
+    "expanded": false
+  },
+  {
+    "id": "p1770542596307",
+    "name": "wbq",
+    "type": "PROJECT",
+    "parent_id": null,
+    "position": 1,
+    "color": "rgb(79, 209, 237)",
+    "expanded": false
+  }
+]

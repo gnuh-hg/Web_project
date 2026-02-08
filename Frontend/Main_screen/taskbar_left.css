@@ -1,18 +1,24 @@
+/* ==========================================================================
+   1. GLOBAL & RESET STYLES
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* ==========================================================================
+   2. SIDEBAR LAYOUT
+   ========================================================================== */
 .sidebar-nav {
     position: relative;
+    display: flex;
+    flex-direction: column;
     margin-top: 5px;
     margin-bottom: 5px;
     width: 200px;
     height: calc(100vh - 60px);
     background-color: #1a1a20;
-    display: flex;
-    flex-direction: column;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
@@ -23,52 +29,43 @@
     padding: 5px;
 }
 
+/* Container chung cho danh sách */
 .list-wrapper {
-    background-color: transparent;
     width: 100%;
-    outline: none;
+    min-height: 5px;
+    list-style: none;
+    background-color: transparent;
     color: #dbdee1;
     font-size: 14px;
-    list-style: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
 }
 
+/* ==========================================================================
+   3. PROJECT ITEM (PARENT)
+   ========================================================================== */
 .project-item {
+    width: 100%;
     background-color: transparent;
     border-radius: 5px;
     margin: 0;
-    width: 100%;
-    outline: none;
     color: #dbdee1;
     font-size: 14px;
+    outline: none;
 }
 
+/* Header của Project */
 .project-item div.item-header {
-    background-color: transparent;
     display: flex;
-    border-radius: 5px;
+    width: 100%;
     padding: 5px 5px;
     margin: 0;
-    width: 100%;
-    outline: none;
+    background-color: transparent;
+    border-radius: 5px;
     color: #dbdee1;
     font-size: 14px;
-}
-
-.project-item div.item-content {
-    background-color: transparent;
-    margin-left: 12px;
-    display: none;
-}
-
-.project-item div.item-header svg.project-icon {
-    width: 22px;
-}
-
-.project-item div.item-header svg.project-icon path {
-    /* fill: white; */
-    stroke-width: 3;
-    stroke-linejoin: round;
-    stroke-linecap: round;
+    outline: none;
 }
 
 .project-item div.item-header p.label {
@@ -79,12 +76,21 @@
     background-color: transparent;
 }
 
-
-
+/* Icons trong Project Header */
 .project-item div.item-header svg {
     width: 15px;
-    background-color: transparent;
     margin-right: 4px;
+    background-color: transparent;
+}
+
+.project-item div.item-header svg.project-icon {
+    width: 22px;
+}
+
+.project-item div.item-header svg.project-icon path {
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
 }
 
 .project-item div.item-header svg polyline {
@@ -95,69 +101,86 @@
     stroke-linejoin: round;
 }
 
+/* Trạng thái Expand/Collapse của Project */
 .project-item div.item-header svg.icon-expanded {
     display: none;
 }
 
-.task-item {
+.project-item div.item-content {
+    display: none;
+    margin-left: 12px;
     background-color: transparent;
+}
+
+.project-item.is-expanded > .item-content {
+    display: block;
+}
+
+.item-content .list-wrapper {
+    min-height: 10px;
+}
+
+/* ==========================================================================
+   4. TASK ITEM (CHILD)
+   ========================================================================== */
+.task-item {
     display: flex;
-    border-radius: 5px;
+    width: 100%;
     padding: 5px;
     margin-left: 0px;
-    width: 100%;
-    display: flex;
+    background-color: transparent;
+    border-radius: 5px;
 }
 
 .task-item p {
     background-color: transparent;
-    outline: none;
     color: #dbdee1;
     font-size: 14px;
+    outline: none;
 }
 
 .task-item svg.task-icon {
     width: 10px;
-    background-color: transparent;
     margin-right: 10px;
     margin-left: 5px;
+    background-color: transparent;
 }
 
 .task-item svg.task-icon circle {
-    /* fill: white; */
     stroke-width: 4;
 }
 
-.project-item div.item-header div.modal-more {
-    display: none;
-    position: relative;
-    background-color: transparent;
-    width: 25px;
-    margin-left: auto;
-}
-
+/* ==========================================================================
+   5. ACTION BUTTONS (MORE/MODAL TRIGGER)
+   ========================================================================== */
+/* Nút ba chấm (More actions) */
+.project-item div.item-header div.modal-more,
 .task-item div.modal-more {
     display: none;
-    background-color: transparent;
     width: 25px;
     margin-left: auto;
+    background-color: transparent;
+}
+
+.project-item div.item-header div.modal-more {
+    position: relative;
 }
 
 .project-item div.item-header div.modal-more svg.action-more {
     position: relative;
     top: 1px;
-    background-color: transparent;
     width: 25px;
     margin-left: auto;
+    background-color: transparent;
     cursor: pointer;
 }
 
 .task-item div.modal-more svg.action-more {
     position: relative;
     bottom: 3px;
-    background-color: transparent;
     width: 25px;
     margin-left: auto;
+    background-color: transparent;
     cursor: pointer;
 }
 
@@ -165,37 +188,23 @@ svg.action-more circle {
     fill: white;
 }
 
-.project-item:hover > div.item-content {
-    border-left: 1px solid #2b2d31;
-    margin-left: 11px;
-}
-
-.list-wrapper li.task-item:hover, 
-.list-wrapper li.project-item div.item-header:hover {
-    background-color: #2b2d31;
-}
-
-.list-wrapper li.task-item:hover > div.modal-more, 
-.list-wrapper li.project-item div.item-header:hover > div.modal-more {
-    display: block;
-}
-
+/* Sidebar Actions (Bottom area) */
 .sidebar-actions {
-    background-color: transparent;
     display: flex;
     margin-top: auto;
+    background-color: transparent;
     border-top: 1px solid #2b2d31;
 }
 
 .add-button {
-    background-color: transparent;
     display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
-    align-items: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px 0;
+    background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .add-button p {
@@ -208,27 +217,27 @@ svg.action-more circle {
 }
 
 .icon-plus svg {
-    background-color: transparent;
-    fill: #ef5541;
+    position: relative;
     width: 18px;
     height: 18px;
-    position: relative;
     margin-right: 5px;
     margin-left: 5px;
+    fill: #ef5541;
+    background-color: transparent;
 }
 
 .icon-folder-plus {
     position: relative;
     top: 2px;
-    background-color: transparent;
     margin-left: auto;
     margin-right: 0px;
+    background-color: transparent;
 }
 
 .icon-folder-plus svg {
-    background-color: transparent;
     width: 25px;
     stroke: #ef5541;
+    background-color: transparent;
 }
 
 .icon-folder-plus svg path {
@@ -239,7 +248,27 @@ svg.action-more circle {
     mask: url(#folder-mask);
 }
 
+/* ==========================================================================
+   6. INTERACTION STATES (HOVER & DRAG)
+   ========================================================================== */
+.list-wrapper li.task-item:hover, 
+.list-wrapper li.project-item div.item-header:hover {
+    background-color: #2b2d31;
+}
+
+.list-wrapper li.task-item:hover > div.modal-more, 
+.list-wrapper li.project-item div.item-header:hover > div.modal-more {
+    display: block;
+}
+
+.project-item:hover > div.item-content {
+    border-left: 1px solid #2b2d31;
+    margin-left: 11px;
+}
+
+.add-button:hover p,
 .add-button:hover .icon-plus svg {
+    color: #f27767;
     fill: #f27767;
 }
 
@@ -247,21 +276,27 @@ svg.action-more circle {
     stroke: #f27767;
 }
 
-.add-button:hover p {
-    color: #f27767;
+.drag-ghost {
+    opacity: 0.4;
+    background-color: #2b2d31 !important;
+    border: 1px dashed #00FFFF;
 }
 
+/* ==========================================================================
+   7. MODAL UI COMPONENTS
+   ========================================================================== */
+/* Overlay nền */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    display: none;
 }
 
 .modal-overlay.show-add .modal-box {
@@ -272,33 +307,36 @@ svg.action-more circle {
     display: flex;
 }
 
-.modal-box {
+/* Cấu trúc chung của Modal Box */
+.modal-box, .modal-more-box {
     position: fixed;
     display: none;
     flex-direction: column;
-    top: 0; 
-    right: 0; 
-    bottom: 0; 
-    left: 0;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: auto;
     width: 300px;
     height: 170px;
-    margin: auto;
-    border-radius: 10px;
     background-color: #1a1a20;
+    border-radius: 10px;
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
+.modal-more-box {
+    padding-top: 10px;
+}
+
+/* Tabs trong Modal */
 .modal-tabs {
-    background-color: transparent;
     display: flex;
     width: 100%;
     height: 20%;
-}    
+    background-color: transparent;
+}
 
 .modal-tabs button {
     position: relative;
-    background-color: transparent;
     width: 100%;
+    background-color: transparent;
     border: none;
     border-bottom: 1px solid #2b2d31;
     font-size: 15px;
@@ -307,91 +345,92 @@ svg.action-more circle {
 
 .modal-tabs button.btn-tab-project {
     border-bottom: 1px solid #00FFFF;
-
 }
 
+/* Form Elements */
 .project-form, .task-form, .form {
     background-color: transparent;
-}
-
-.input-group {
-    background-color: #24242a;
-    display: flex;
-    align-items: center;
-    padding: 7px 12px;
-    margin: 8px 20px;
-    border-radius: 8px;
-    transition: background-color 0.2s;
-}
-
-.modal-input {
-    background: transparent;
-    border: none;
-    color: #dbdee1;
-    font-size: 15px;
-    outline: none;
-    width: 100%;
-}
-
-.modal-input::placeholder {
-    color: #949ba4;
-}
-
-.input-group:focus-within {
-    background-color: #2b2d31;
 }
 
 .task-form {
     display: none;
 }
 
+.input-group {
+    display: flex;
+    align-items: center;
+    margin: 8px 20px;
+    padding: 7px 12px;
+    background-color: #24242a;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.input-group:focus-within {
+    background-color: #2b2d31;
+}
+
+.modal-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #dbdee1;
+    font-size: 15px;
+    outline: none;
+}
+
+.modal-input::placeholder {
+    color: #949ba4;
+}
+
+/* Color Palette */
 .color-palette {
-    background-color: transparent;
     display: grid;
-    margin: auto;
-    margin-top: 0;
     grid-template-columns: repeat(10, 20px); 
     gap: 6px; 
-    /* border: 1px solid; */
+    margin: auto;
+    margin-top: 0;
+    background-color: transparent;
 }
 
 .color-swatch {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .color-swatch:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .color-swatch.selected::after {
-  content: '';
-  width: 3px;
-  height: 6px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  margin-bottom: 2px;
+    content: '';
+    width: 3px;
+    height: 6px;
+    margin-bottom: 2px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
+/* Footer Modal Buttons */
 .confirm-box {
-    background-color: transparent;
     display: flex;
     margin-left: auto;
+    background-color: transparent;
 }
 
 .confirm-box p {
-    background-color: transparent;
     padding: 5px;
     margin: 9px;
+    background-color: transparent;
     border: 1px solid #2b2d31;
     border-radius: 5px;
     font-size: 15px;
@@ -400,41 +439,4 @@ svg.action-more circle {
 
 .confirm-box p:hover {
     background-color: #2b2d31;
-}
-
-.modal-more-box {
-    position: fixed;
-    display: none;
-    flex-direction: column;
-    top: 0; 
-    right: 0; 
-    bottom: 0; 
-    left: 0;
-    width: 300px;
-    height: 170px;
-    margin: auto;
-    padding-top: 10px;
-    border-radius: 10px;
-    background-color: #1a1a20;
-    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
-}
-
-/* Hiệu ứng khi đang kéo */
-.drag-ghost {
-    opacity: 0.4;
-    background-color: #2b2d31 !important;
-    border: 1px dashed #00FFFF;
-}
-
-/* Đảm bảo vùng chứa list luôn có độ cao tối thiểu để có thể thả vào khi trống */
-.list-wrapper {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    min-height: 5px;
-}
-
-/* Khi project mở ra, vùng chứa con rộng hơn để dễ thả */
-.item-content .list-wrapper {
-    min-height: 10px;
 }
