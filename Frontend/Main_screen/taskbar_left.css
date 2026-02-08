@@ -18,42 +18,6 @@
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
-.search-form {
-    background-color: #24242a;
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    margin: 5px 5px;
-    border-radius: 8px;
-    transition: background-color 0.2s;
-}
-
-.search-icon {
-    background-color: transparent;
-    width: 20px;
-    height: 20px;
-    color: #949ba4;
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
-.search-input {
-    background: transparent;
-    border: none;
-    color: #dbdee1;
-    font-size: 15px;
-    outline: none;
-    width: 100%;
-}
-
-.search-input::placeholder {
-    color: #949ba4;
-}
-
-.search-form:focus-within {
-    background-color: #2b2d31;
-}
-
 .project-container {
     background-color: transparent;
     padding: 5px;
@@ -115,16 +79,7 @@
     background-color: transparent;
 }
 
-.project-item div.item-header svg.action-more {
-    display: none;
-    background-color: transparent;
-    width: 25px;
-    margin-left: auto;
-}
 
-.project-item div.item-header svg.action-more circle {
-    fill: white;
-}
 
 .project-item div.item-header svg {
     width: 15px;
@@ -173,14 +128,40 @@
     stroke-width: 4;
 }
 
-.task-item svg.action-more {
+.project-item div.item-header div.modal-more {
+    display: none;
+    position: relative;
+    background-color: transparent;
+    width: 25px;
+    margin-left: auto;
+}
+
+.task-item div.modal-more {
     display: none;
     background-color: transparent;
     width: 25px;
     margin-left: auto;
 }
 
-.task-item svg.action-more circle {
+.project-item div.item-header div.modal-more svg.action-more {
+    position: relative;
+    top: 1px;
+    background-color: transparent;
+    width: 25px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.task-item div.modal-more svg.action-more {
+    position: relative;
+    bottom: 3px;
+    background-color: transparent;
+    width: 25px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+svg.action-more circle {
     fill: white;
 }
 
@@ -194,8 +175,8 @@
     background-color: #2b2d31;
 }
 
-.list-wrapper li.task-item:hover > svg.action-more, 
-.list-wrapper li.project-item div.item-header:hover > svg.action-more {
+.list-wrapper li.task-item:hover > div.modal-more, 
+.list-wrapper li.project-item div.item-header:hover > div.modal-more {
     display: block;
 }
 
@@ -283,9 +264,17 @@
     display: none;
 }
 
+.modal-overlay.show-add .modal-box {
+    display: flex;
+}
+
+.modal-overlay.show-more .modal-more-box {
+    display: flex;
+}
+
 .modal-box {
     position: fixed;
-    display: flex;
+    display: none;
     flex-direction: column;
     top: 0; 
     right: 0; 
@@ -313,13 +302,15 @@
     border: none;
     border-bottom: 1px solid #2b2d31;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .modal-tabs button.btn-tab-project {
     border-bottom: 1px solid #00FFFF;
+
 }
 
-.project-form, .task-form {
+.project-form, .task-form, .form {
     background-color: transparent;
 }
 
@@ -404,10 +395,28 @@
     border: 1px solid #2b2d31;
     border-radius: 5px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .confirm-box p:hover {
     background-color: #2b2d31;
+}
+
+.modal-more-box {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
+    width: 300px;
+    height: 170px;
+    margin: auto;
+    padding-top: 10px;
+    border-radius: 10px;
+    background-color: #1a1a20;
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
 /* Hiệu ứng khi đang kéo */
@@ -427,6 +436,5 @@
 
 /* Khi project mở ra, vùng chứa con rộng hơn để dễ thả */
 .item-content .list-wrapper {
-    /* padding-left: 20px; */
     min-height: 10px;
 }
