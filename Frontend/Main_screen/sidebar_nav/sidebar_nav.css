@@ -13,6 +13,7 @@
 .sidebar-nav {
     position: relative;
     display: flex;
+    /* display: none; */
     flex-direction: column;
     margin: 5px;
     margin-left: 0;

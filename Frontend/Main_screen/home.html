@@ -6,8 +6,10 @@
         <link rel="stylesheet" href="./app_header/app_header.css" />
         <link rel="stylesheet" href="./sidebar_nav/sidebar_nav.css" />
         <link rel="stylesheet" href="./workspace/workspace.css" />
-        <link rel="stylesheet" href="./pomodoro/pomodoro.css" class="">
+        <link rel="stylesheet" href="./pomodoro/pomodoro.css">
+
         <script src="./sidebar_nav/sidebar_nav.js" defer></script>
+        <script src="./workspace/workspace.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     </head>
     <body>
@@ -185,11 +187,40 @@
                 </div>
             </div>
             <div class="workspace">
-                <p class="name-folder">aaaa</p>
-                <div class="data-container"></div>
+                <p class="name-folder">aaw</p>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Tasks to Do</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0<span class="unit">m</span></div>
+                        <div class="stat-label">Elapsed Time</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Tasks Completed</div>
+                    </div>
+                </div>
+
+                <div class="task-input-wrapper">
+                    <div class="input-group">
+                        <span class="plus-icon">+</span>
+                        <input type="text" placeholder="Add a task to 'Tasks', press 'Enter' to save">
+                    </div>
+                </div>
+            
+                <div class="task-list-content">
+                    <div class="empty-state">
+                        <p>No tasks available</p>
+                    </div>
+                </div>
+                <button class="btn-toggle-completed">
+                    Hide completed tasks ▲
+                </button>
             </div>
             <div class="pomodoro">
-                
+
             </div>
         </div>
     </body>
