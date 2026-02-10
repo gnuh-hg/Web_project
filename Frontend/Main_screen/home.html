@@ -3,9 +3,11 @@
     <head>
         <title>Focus to-do</title>
         <link rel="stylesheet" href="./home.css" />
-        <link rel="stylesheet" href="./taskbar_top.css"/>
-        <link rel="stylesheet" href="./taskbar_left.css"/>
-        <script src="./taskbar_left.js" defer></script>
+        <link rel="stylesheet" href="./app_header/app_header.css" />
+        <link rel="stylesheet" href="./sidebar_nav/sidebar_nav.css" />
+        <link rel="stylesheet" href="./workspace/workspace.css" />
+        <link rel="stylesheet" href="./pomodoro/pomodoro.css" class="">
+        <script src="./sidebar_nav/sidebar_nav.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     </head>
     <body>
@@ -73,9 +75,10 @@
                </li>
             </ul>
         </div>
-        <div class="sidebar-nav">
-            <div class="project-container"><ul class="list-wrapper"></ul></div>
-            <div class="sidebar-actions">
+        <div class="container">
+            <div class="sidebar-nav">
+                <div class="folder-container"><ul class="list-wrapper"></ul></div>
+                <div class="sidebar-actions">
                 <button class="add-button">
                     <div class="icon-plus">
                         <svg viewBox="0 0 100 100">
@@ -83,7 +86,7 @@
                             <rect x="10" y="44" width="80" height="12" />
                         </svg>
                     </div>
-                    <p>Add project</p>
+                    <p>Add folder</p>
                     <div class="icon-folder-plus">
                         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -104,17 +107,17 @@
                 <div class="modal-overlay">
                     <div class="modal-box">
                         <div class="modal-tabs">
+                            <button class="btn-tab-folder">Add folder</button>
                             <button class="btn-tab-project">Add project</button>
-                            <button class="btn-tab-task">Add task</button>
                         </div>
-                        <div class="project-form">
+                        <div class="folder-form">
                             <form class="input-group">
-                                <input type="text" placeholder="Name project" class="modal-input">
+                                <input type="text" placeholder="Name folder" class="modal-input">
                             </form>
                         </div>
-                        <div class="task-form">
+                        <div class="project-form">
                         <form class="input-group">
-                            <input type="text" placeholder="Name task" class="modal-input">
+                            <input type="text" placeholder="Name project" class="modal-input">
                         </form>
                         </div>
                         <div class="color-palette">
@@ -179,6 +182,14 @@
                         </div>
                     </div>
                 </div>
+                </div>
+            </div>
+            <div class="workspace">
+                <p class="name-folder">aaaa</p>
+                <div class="data-container"></div>
+            </div>
+            <div class="pomodoro">
+                
             </div>
         </div>
     </body>

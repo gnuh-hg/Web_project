@@ -14,9 +14,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 200px;
+    margin: 5px;
+    margin-left: 0;
+    width: calc(20% - 5px);
+    min-width: 200px;
     height: calc(100vh - 60px);
     background-color: #1a1a20;
     border-top-right-radius: 8px;
@@ -24,7 +25,8 @@
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
-.project-container {
+/* project-container -> folder-container */
+.folder-container {
     background-color: transparent;
     padding: 5px;
 }
@@ -43,9 +45,9 @@
 }
 
 /* ==========================================================================
-   3. PROJECT ITEM (PARENT)
+   3. FOLDER ITEM (PARENT) - Trước đây là Project
    ========================================================================== */
-.project-item {
+.folder-item {
     width: 100%;
     background-color: transparent;
     border-radius: 5px;
@@ -55,8 +57,8 @@
     outline: none;
 }
 
-/* Header của Project */
-.project-item div.item-header {
+/* Header của Folder */
+.folder-item div.item-header {
     display: flex;
     width: 100%;
     padding: 5px 5px;
@@ -68,7 +70,7 @@
     outline: none;
 }
 
-.project-item div.item-header p.label {
+.folder-item div.item-header p.label {
     position: relative;
     top: 3px;
     margin-left: 0;
@@ -76,24 +78,25 @@
     background-color: transparent;
 }
 
-/* Icons trong Project Header */
-.project-item div.item-header svg {
+/* Icons trong Folder Header */
+.folder-item div.item-header svg {
     width: 15px;
     margin-right: 4px;
     background-color: transparent;
 }
 
-.project-item div.item-header svg.project-icon {
+/* project-icon -> folder-icon */
+.folder-item div.item-header svg.folder-icon {
     width: 22px;
 }
 
-.project-item div.item-header svg.project-icon path {
+.folder-item div.item-header svg.folder-icon path {
     stroke-width: 3;
     stroke-linejoin: round;
     stroke-linecap: round;
 }
 
-.project-item div.item-header svg polyline {
+.folder-item div.item-header svg polyline {
     fill: none;
     stroke: white;
     stroke-width: 2.5;
@@ -101,18 +104,18 @@
     stroke-linejoin: round;
 }
 
-/* Trạng thái Expand/Collapse của Project */
-.project-item div.item-header svg.icon-expanded {
+/* Trạng thái Expand/Collapse của Folder */
+.folder-item div.item-header svg.icon-expanded {
     display: none;
 }
 
-.project-item div.item-content {
+.folder-item div.item-content {
     display: none;
     margin-left: 12px;
     background-color: transparent;
 }
 
-.project-item.is-expanded > .item-content {
+.folder-item.is-expanded > .item-content {
     display: block;
 }
 
@@ -121,9 +124,9 @@
 }
 
 /* ==========================================================================
-   4. TASK ITEM (CHILD)
+   4. PROJECT ITEM (CHILD) - Trước đây là Task
    ========================================================================== */
-.task-item {
+.project-item-child { /* Đổi tên để tránh trùng với folder-item nếu cần, hoặc dùng .project-item */
     display: flex;
     width: 100%;
     padding: 5px;
@@ -132,21 +135,22 @@
     border-radius: 5px;
 }
 
-.task-item p {
+.project-item-child p {
     background-color: transparent;
     color: #dbdee1;
     font-size: 14px;
     outline: none;
 }
 
-.task-item svg.task-icon {
+/* task-icon -> project-icon */
+.project-item-child svg.project-icon {
     width: 10px;
     margin-right: 10px;
     margin-left: 5px;
     background-color: transparent;
 }
 
-.task-item svg.task-icon circle {
+.project-item-child svg.project-icon circle {
     stroke-width: 4;
 }
 
@@ -154,19 +158,19 @@
    5. ACTION BUTTONS (MORE/MODAL TRIGGER)
    ========================================================================== */
 /* Nút ba chấm (More actions) */
-.project-item div.item-header div.modal-more,
-.task-item div.modal-more {
+.folder-item div.item-header div.modal-more,
+.project-item-child div.modal-more {
     display: none;
     width: 25px;
     margin-left: auto;
     background-color: transparent;
 }
 
-.project-item div.item-header div.modal-more {
+.folder-item div.item-header div.modal-more {
     position: relative;
 }
 
-.project-item div.item-header div.modal-more svg.action-more {
+.folder-item div.item-header div.modal-more svg.action-more {
     position: relative;
     top: 1px;
     width: 25px;
@@ -175,7 +179,7 @@
     cursor: pointer;
 }
 
-.task-item div.modal-more svg.action-more {
+.project-item-child div.modal-more svg.action-more {
     position: relative;
     bottom: 3px;
     width: 25px;
@@ -251,17 +255,17 @@ svg.action-more circle {
 /* ==========================================================================
    6. INTERACTION STATES (HOVER & DRAG)
    ========================================================================== */
-.list-wrapper li.task-item:hover, 
-.list-wrapper li.project-item div.item-header:hover {
+.list-wrapper li.project-item-child:hover, 
+.list-wrapper li.folder-item div.item-header:hover {
     background-color: #2b2d31;
 }
 
-.list-wrapper li.task-item:hover > div.modal-more, 
-.list-wrapper li.project-item div.item-header:hover > div.modal-more {
+.list-wrapper li.project-item-child:hover > div.modal-more, 
+.list-wrapper li.folder-item div.item-header:hover > div.modal-more {
     display: block;
 }
 
-.project-item:hover > div.item-content {
+.folder-item:hover > div.item-content {
     border-left: 1px solid #2b2d31;
     margin-left: 11px;
 }
@@ -343,16 +347,18 @@ svg.action-more circle {
     cursor: pointer;
 }
 
-.modal-tabs button.btn-tab-project {
+/* btn-tab-project -> btn-tab-folder */
+.modal-tabs button.btn-tab-folder {
     border-bottom: 1px solid #00FFFF;
 }
 
 /* Form Elements */
-.project-form, .task-form, .form {
+/* project-form -> folder-form | task-form -> project-form */
+.folder-form, .project-form, .form {
     background-color: transparent;
 }
 
-.task-form {
+.project-form {
     display: none;
 }
 

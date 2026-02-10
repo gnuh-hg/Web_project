@@ -2,9 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.querySelector('.modal-overlay');
     const modalBox = document.querySelector('.modal-box');
     const modalMoreBox = document.querySelector('.modal-more-box');
-    const projectForm = document.querySelector('.project-form');
-    const taskForm = document.querySelector('.task-form');
-    const mainListWrapper = document.querySelector('.project-container > .list-wrapper');
+    
+    // Đổi tên biến form để khớp với chức năng mới
+    const folderForm = document.querySelector('.folder-form');
+    const projectForm = document.querySelector('.project-form'); 
+    const mainListWrapper = document.querySelector('.folder-container > .list-wrapper');
     
     let currentSelectedItem = null; 
 
@@ -16,19 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
             items.sort((a, b) => a.position - b.position);
             mainListWrapper.innerHTML = '';
 
-            // Hàm đệ quy để render đúng cấp bậc
             function renderRecursive(parentId, container) {
                 const children = items.filter(item => item.parent_id === parentId);
                 children.forEach(item => {
-                    renderItem(item, container); // Render item hiện tại
-                    if (item.type === "PROJECT") {
+                    renderItem(item, container);
+                    if (item.type === "FOLDER") { // Logic cho cấp cha
                         const newContainer = document.querySelector(`[data-id="${item.id}"] .list-wrapper`);
-                        renderRecursive(item.id, newContainer); // Đệ quy tìm con của item này
+                        if (newContainer) renderRecursive(item.id, newContainer);
                     }
                 });
             }
 
-            // Bắt đầu từ cấp cao nhất (parent_id là null hoặc không có)
             renderRecursive(null, mainListWrapper);
         } catch (err) {
             console.error("Lỗi khi load dữ liệu:", err);
@@ -39,19 +39,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderItem(item, wrapper) {
         let html = '';
         const color = item.color || "#ffffff"; 
-        // Kiểm tra xem folder có đang được lưu là mở hay không
         const expandedClass = item.expanded ? 'is-expanded' : '';
-        const displayStyle = item.expanded ? 'block' : 'none';
         const iconExpandedStyle = item.expanded ? 'block' : 'none';
         const iconCollapsedStyle = item.expanded ? 'none' : 'block';
 
-        if (item.type === "PROJECT") {
+        if (item.type === "FOLDER") {
             html = `
-                <li class="project-item ${expandedClass}" data-id="${item.id}">
+                <li class="folder-item ${expandedClass}" data-id="${item.id}">
                     <div class="item-header">
                         <svg class="icon-collapsed" viewBox="0 0 24 24" style="display:${iconCollapsedStyle};"><polyline points="8,5 16,12 8,19"/></svg>
                         <svg class="icon-expanded" viewBox="0 0 24 24" style="display:${iconExpandedStyle};"><polyline points="5,8 12,16 19,8"/></svg>
-                        <svg class="project-icon" viewBox="0 0 64 64"><path d="M8 20 H22 L26 16 H44 Q50 16 50 22 V40 Q50 48 42 48 H16 Q8 48 8 40 Z" fill="${color}"/></svg>
+                        <svg class="folder-icon" viewBox="0 0 64 64"><path d="M8 20 H22 L26 16 H44 Q50 16 50 22 V40 Q50 48 42 48 H16 Q8 48 8 40 Z" fill="${color}"/></svg>
                         <p class="label">${item.name}</p>
                         <div class="modal-more"><svg class="action-more" viewBox="0 0 20 5" width="60"><circle cx="5" cy="3" r="1"/><circle cx="10" cy="3" r="1"/><circle cx="15" cy="3" r="1"/></svg></div>
                     </div>
@@ -59,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </li>`;
         } else {
             html = `
-                <li class="task-item" data-id="${item.id}">
-                    <svg class="task-icon" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="${color}"/></svg>
+                <li class="project-item-child" data-id="${item.id}">
+                    <svg class="project-icon" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="${color}"/></svg>
                     <p>${item.name}</p>
                     <div class="modal-more"><svg class="action-more" viewBox="0 0 20 5" width="60"><circle cx="5" cy="3" r="1"/><circle cx="10" cy="3" r="1"/><circle cx="15" cy="3" r="1"/></svg></div>
                 </li>`;
@@ -78,30 +76,28 @@ document.addEventListener('DOMContentLoaded', function() {
             listItems.forEach((li, index) => {
                 const id = li.getAttribute('data-id');
                 const name = li.querySelector('p').innerText;
-                const isProject = li.classList.contains('project-item');
-                const iconPath = li.querySelector('.project-icon path') || li.querySelector('.task-icon circle');
+                const isFolder = li.classList.contains('folder-item');
+                const iconPath = li.querySelector('.folder-icon path') || li.querySelector('.project-icon circle');
                 const currentColor = iconPath ? (iconPath.getAttribute('fill') || iconPath.style.fill) : '#ffffff';
-                
-                // Kiểm tra xem folder có class is-expanded không
                 const isExpanded = li.classList.contains('is-expanded');
 
                 items.push({
                     id: id,
                     name: name,
-                    type: isProject ? "PROJECT" : "TASK",
+                    type: isFolder ? "FOLDER" : "PROJECT", // Cập nhật Type mới
                     parent_id: parentId,
                     position: index,
                     color: currentColor,
-                    expanded: isExpanded // Lưu trạng thái mở/đóng
+                    expanded: isExpanded
                 });
 
-                if (isProject) {
+                if (isFolder) {
                     const subWrapper = li.querySelector('.list-wrapper');
                     if (subWrapper) traverse(subWrapper, id);
                 }
             });
         }
-        traverse(mainListWrapper);
+        if (mainListWrapper) traverse(mainListWrapper);
 
         try {
             await fetch('http://localhost:3000/save', {
@@ -112,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (err) { console.error("Lỗi lưu dữ liệu:", err); }
     }
 
-    // ... (Các hàm modal giữ nguyên) ...
     function closeAllModals() {
         overlay.style.display = 'none';
         modalBox.style.display = 'none';
@@ -132,19 +127,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainListWrapper) new Sortable(mainListWrapper, sortableOptions);
 
     function attachEventsToNewItem(item) {
-        // Modal more btn
         const moreBtn = item.querySelector('.modal-more');
         if (moreBtn) {
             moreBtn.addEventListener('click', (e) => {
                 e.stopPropagation(); 
                 currentSelectedItem = item; 
                 const currentName = item.querySelector('p').innerText;
-                const iconPath = item.querySelector('.project-icon path') || item.querySelector('.task-icon circle');
+                const iconPath = item.querySelector('.folder-icon path') || item.querySelector('.project-icon circle');
                 const currentColor = iconPath ? (iconPath.getAttribute('fill') || iconPath.style.fill) : '#ffffff';
+                
                 overlay.style.display = 'flex';
                 modalMoreBox.style.display = 'flex';
                 modalBox.style.display = 'none';
                 modalMoreBox.querySelector('.modal-input').value = currentName;
+                
                 const swatches = modalMoreBox.querySelectorAll('.color-swatch');
                 swatches.forEach(s => {
                     s.classList.remove('selected');
@@ -153,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Click header mở folder
         const header = item.querySelector('.item-header');
         if (header) {
             header.addEventListener('click', function() {
@@ -168,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     iconExpanded.style.display = isExpanded ? 'block' : 'none';
                     iconCollapsed.style.display = isExpanded ? 'none' : 'block';
                 }
-                // Quan trọng: Lưu trạng thái ngay khi người dùng click mở/đóng
                 saveData(); 
             });
         }
@@ -177,23 +171,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (subList) new Sortable(subList, sortableOptions);
     }
 
-    // ... (Các sự kiện Accept/Delete/Tab giữ nguyên như code trước của bạn) ...
-    // Note: Đảm bảo phần "Chấp nhận thêm mới" gọi hàm renderItem thay vì viết HTML thủ công
     const btnAccept = document.querySelector('.modal-box .btn-accept');
     if (btnAccept) {
         btnAccept.addEventListener('click', function() {
-            const isProjectForm = window.getComputedStyle(projectForm).display !== 'none';
-            const activeInput = isProjectForm ? projectForm.querySelector('.modal-input') : taskForm.querySelector('.modal-input');
+            // Kiểm tra xem đang ở tab folder hay tab project
+            const isFolderForm = window.getComputedStyle(folderForm).display !== 'none';
+            const activeInput = isFolderForm ? folderForm.querySelector('.modal-input') : projectForm.querySelector('.modal-input');
             const nameValue = activeInput.value.trim();
             const selectedSwatch = document.querySelector('.modal-box .color-swatch.selected');
             const colorValue = selectedSwatch ? selectedSwatch.style.backgroundColor : '#ffffff';
+            
             if (!nameValue) { activeInput.focus(); return; }
 
-            const newId = (isProjectForm ? 'p' : 't') + Date.now();
+            const newId = (isFolderForm ? 'f' : 'p') + Date.now();
             renderItem({
                 id: newId,
                 name: nameValue,
-                type: isProjectForm ? "PROJECT" : "TASK",
+                type: isFolderForm ? "FOLDER" : "PROJECT",
                 color: colorValue,
                 parent_id: null,
                 expanded: false
@@ -205,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Các listener còn lại
     const btnAcceptMore = document.querySelector('.modal-more-box .btn-accept');
     if (btnAcceptMore) {
         btnAcceptMore.addEventListener('click', function() {
@@ -213,10 +206,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const newName = modalMoreBox.querySelector('.modal-input').value.trim();
             const selectedSwatch = modalMoreBox.querySelector('.color-swatch.selected');
             const newColor = selectedSwatch ? selectedSwatch.style.backgroundColor : '#ffffff';
+            
             if (newName === "") return;
             currentSelectedItem.querySelector('p').innerText = newName;
-            const iconPath = currentSelectedItem.querySelector('.project-icon path') || currentSelectedItem.querySelector('.task-icon circle');
+            const iconPath = currentSelectedItem.querySelector('.folder-icon path') || currentSelectedItem.querySelector('.project-icon circle');
             if (iconPath) iconPath.setAttribute('fill', newColor);
+            
             closeAllModals();
             saveData();
         });
@@ -245,18 +240,22 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeAllModals(); });
     document.querySelectorAll('.btn-cancel').forEach(btn => btn.addEventListener('click', closeAllModals));
 
+    // Tab switcher logic
+    const btnTabFolder = document.querySelector('.btn-tab-folder');
     const btnTabProject = document.querySelector('.btn-tab-project');
-    const btnTabTask = document.querySelector('.btn-tab-task');
-    if (btnTabProject && btnTabTask) {
+    
+    if (btnTabFolder && btnTabProject) {
+        btnTabFolder.addEventListener('click', () => {
+            btnTabFolder.style.borderBottom = "1px solid #00FFFF";
+            btnTabProject.style.borderBottom = "1px solid #2b2d31";
+            folderForm.style.display = "block"; 
+            projectForm.style.display = "none";
+        });
         btnTabProject.addEventListener('click', () => {
             btnTabProject.style.borderBottom = "1px solid #00FFFF";
-            btnTabTask.style.borderBottom = "1px solid #2b2d31";
-            projectForm.style.display = "block"; taskForm.style.display = "none";
-        });
-        btnTabTask.addEventListener('click', () => {
-            btnTabTask.style.borderBottom = "1px solid #00FFFF";
-            btnTabProject.style.borderBottom = "1px solid #2b2d31";
-            taskForm.style.display = "block"; projectForm.style.display = "none";
+            btnTabFolder.style.borderBottom = "1px solid #2b2d31";
+            projectForm.style.display = "block"; 
+            folderForm.style.display = "none";
         });
     }
 
