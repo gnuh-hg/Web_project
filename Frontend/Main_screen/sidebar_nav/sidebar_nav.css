@@ -13,7 +13,7 @@
 .sidebar-nav {
     position: relative;
     display: flex;
-    /* display: none; */
+    display: none;
     flex-direction: column;
     margin: 5px;
     margin-left: 0;
@@ -26,7 +26,7 @@
     box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
 }
 
-/* project-container -> folder-container */
+/* folder-container */
 .folder-container {
     background-color: transparent;
     padding: 5px;
@@ -46,7 +46,7 @@
 }
 
 /* ==========================================================================
-   3. FOLDER ITEM (PARENT) - Trước đây là Project
+   3. FOLDER ITEM (PARENT)
    ========================================================================== */
 .folder-item {
     width: 100%;
@@ -86,7 +86,7 @@
     background-color: transparent;
 }
 
-/* project-icon -> folder-icon */
+/* folder-icon */
 .folder-item div.item-header svg.folder-icon {
     width: 22px;
 }
@@ -125,9 +125,9 @@
 }
 
 /* ==========================================================================
-   4. PROJECT ITEM (CHILD) - Trước đây là Task
+   4. PROJECT ITEM (CHILD)
    ========================================================================== */
-.project-item-child { /* Đổi tên để tránh trùng với folder-item nếu cần, hoặc dùng .project-item */
+.project-item-child {
     display: flex;
     width: 100%;
     padding: 5px;
@@ -143,7 +143,7 @@
     outline: none;
 }
 
-/* task-icon -> project-icon */
+/* project-icon */
 .project-item-child svg.project-icon {
     width: 10px;
     margin-right: 10px;

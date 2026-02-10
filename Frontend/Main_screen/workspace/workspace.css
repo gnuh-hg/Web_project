@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     margin: 5px;
-    width: calc(50% - 10px);
+    width: 100%;
+    /* width: calc(50% - 10px); */
     height: calc(100vh - 60px);
 }
 
@@ -94,4 +95,41 @@
     border-radius: 15px;
     font-size: 12px;
     cursor: pointer;
+}
+
+.task-container {
+    /* border: 1px solid white; */
+    display: flex;
+    margin: 5px;
+    width: 100%;
+    margin-bottom: auto;
+}
+
+.task-list {
+    width: 100%;
+    min-height: 5px;
+    list-style: none;
+    color: #dbdee1;
+    font-size: 14px;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.task-list li {
+    /* border: 1px solid white; */
+    background-color: #1a1a20;
+    border-radius: 7px;
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0px;
+    display: flex;
+}
+
+.status {
+    height: 16px;
+    width: 16px;
+    border: 1px solid white;
+    border-radius: 8px;
+    margin-right: 5px;
 }
