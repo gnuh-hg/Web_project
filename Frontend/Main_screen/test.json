@@ -1,38 +1,38 @@
 [
   {
-    "id": "p1770542550907",
-    "name": "wqr",
-    "type": "PROJECT",
+    "id": "f1770807023093",
+    "name": "a",
+    "type": "FOLDER",
     "parent_id": null,
     "position": 0,
-    "color": "rgb(246, 173, 85)",
+    "color": "#ffffff",
     "expanded": true
   },
   {
-    "id": "t1770542557411",
-    "name": "vqw2",
-    "type": "TASK",
-    "parent_id": "p1770542550907",
+    "id": "p1770807026365",
+    "name": "b",
+    "type": "PROJECT",
+    "parent_id": "f1770807023093",
     "position": 0,
-    "color": "rgb(154, 230, 180)",
+    "color": "rgb(184, 50, 128)",
     "expanded": false
   },
   {
-    "id": "p1770542599138",
-    "name": "wq",
-    "type": "PROJECT",
-    "parent_id": "p1770542550907",
-    "position": 1,
-    "color": "#ffffff",
-    "expanded": false
-  },
-  {
-    "id": "p1770542596307",
-    "name": "wbq",
-    "type": "PROJECT",
+    "id": "f1770807202075",
+    "name": "bư",
+    "type": "FOLDER",
     "parent_id": null,
     "position": 1,
-    "color": "rgb(79, 209, 237)",
+    "color": "#ffffff",
+    "expanded": true
+  },
+  {
+    "id": "p1770807294081",
+    "name": "ưab",
+    "type": "PROJECT",
+    "parent_id": "f1770807202075",
+    "position": 0,
+    "color": "#ffffff",
     "expanded": false
   }
 ]
